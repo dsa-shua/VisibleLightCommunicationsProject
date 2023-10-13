@@ -1,19 +1,23 @@
-#define TIME_SLICE_S 1 // 1 sec
+#define TIME_SLICE_S 4 // 1 sec
 #define TIME_SLICE (TIME_SLICE_S * 1000)
 #define M 2                               // 2^(m)
-#define SLICE_LEN (TIME_SLICE >> (2))
+#define SLICE_LEN (TIME_SLICE >> (M))
 #define SLICE_00 (SLICE_LEN*0)
 #define SLICE_01 (SLICE_LEN*1)
 #define SLICE_10 (SLICE_LEN*2)
 #define SLICE_11 (SLICE_LEN*3)
-#define SELF_DELAY 1                      // ms
-#define NEXT_DELAY 10                   // ms
+#define SELF_DELAY 500                      // ms
+#define NEXT_DELAY 5000                   // ms
 #define LASER 12                          // DigitalPin 12
 
 #define LED0 8
 #define LED1 9
 #define LED2 10
 #define LED3 11
+
+#define TEST_LED 7
+
+#define LED_READERS 1
 
 #include <Chrono.h>
 
@@ -39,11 +43,12 @@ void _config(void){
 
 void _transfer(int data){
 
+#if LED_READERS
   if (data == 0) digitalWrite(LED0, HIGH);  
   else if (data == 1) digitalWrite(LED1, HIGH);
   else if (data == 2) digitalWrite(LED2, HIGH);
   else digitalWrite(LED3, HIGH);
-
+#endif
    
   total_start = myChrono.elapsed();
   time_start = myChrono.elapsed();
@@ -59,14 +64,13 @@ void _transfer(int data){
 
   // Second Flash
   if (data == 0){
-    delay(SELF_DELAY);
     digitalWrite(LASER,HIGH);
     
-    
+    delay(SELF_DELAY);
 
     latency_1 = myChrono.elapsed() - time_start; // second flash
     digitalWrite(LASER, LOW);
-    delay(750);
+    delay(TIME_SLICE-SLICE_00);
   }
   else if (data == 1){
     delay(SLICE_01);
@@ -76,7 +80,7 @@ void _transfer(int data){
 
     latency_1 = myChrono.elapsed() - time_start; // second flash
     digitalWrite(LASER, LOW);
-    delay(500);
+    delay(TIME_SLICE-SLICE_01);
     
   }
   else if (data == 2) {
@@ -87,7 +91,7 @@ void _transfer(int data){
 
     latency_1 = myChrono.elapsed() - time_start; // second flash
     digitalWrite(LASER, LOW);
-    delay(250);
+    delay(TIME_SLICE-SLICE_10);
     
   } else {
     delay(SLICE_11);
@@ -132,7 +136,21 @@ void setup() {
   Serial.begin(9600);
   _config();
   pinMode(LASER, OUTPUT);
+
   digitalWrite(LASER, LOW);
+
+
+
+#if LED_READERS
+  pinMode(LED0, OUTPUT); digitalWrite(LED0, LOW);
+  pinMode(LED1, OUTPUT); digitalWrite(LED1, LOW);
+  pinMode(LED2, OUTPUT); digitalWrite(LED2, LOW);
+  pinMode(LED3, OUTPUT); digitalWrite(LED3, LOW);
+#endif
+
+//  pinMode(TEST_LED, OUTPUT); digitalWrite(TEST_LED,HIGH);
+
+
 }
 
 void loop() {
