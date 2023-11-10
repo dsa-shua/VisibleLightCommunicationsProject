@@ -4,9 +4,10 @@ V2 VLC
 
 Current Implementation
 - has header and tail buffers 
-- goes to 1.3 seconds at 8 bits
-- 100 ms on time
-- 100 ms cooldowns
+- goes to 1.3 seconds at 8 bits (confirmed and tested as of Nov 10, 2023)
+- 10 ms on time
+- 10 ms cooldowns
+- 5ms on time
 
 
 <b>Schematic:</b>
