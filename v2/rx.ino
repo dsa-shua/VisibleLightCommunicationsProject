@@ -1,9 +1,9 @@
-#define ON_TIME 100 // 50ms
-#define CD_TIME (ON_TIME << 1) 
-#define HEAD_BUFFER 100 // (ON_TIME << 1)
-#define TAIL_BUFFER 100 //(ON_TIME << 1)
-#define M (3) // 2^m 
-#define N (1 << M) // = 8
+#define ON_TIME 5 // 50ms
+#define CD_TIME 10 // (ON_TIME << 1) 
+#define HEAD_BUFFER 10 // (ON_TIME << 1)
+#define TAIL_BUFFER 10 //(ON_TIME << 1)
+#define M (8) // 2^m 
+#define N (1 << M) // = 16
 
 #define TX_IN 12
 #define HEAD_LED 2
@@ -70,7 +70,7 @@ void loop() {
     digitalWrite(BIT2, result & 0x4);
     digitalWrite(BIT3, result & 0x8);
     
-    delay(800);
+    delay(150);
     statusReg = WAIT;
   }
 
