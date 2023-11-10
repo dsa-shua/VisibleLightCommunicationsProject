@@ -1,9 +1,9 @@
-#define ON_TIME 100 // 50ms
-#define CD_TIME (ON_TIME << 1) 
-#define HEAD_BUFFER 100 // (ON_TIME << 1)
-#define TAIL_BUFFER 100 //(ON_TIME << 1)
-#define M (3) // 2^m 
-#define N (1 << M) // = 8
+#define ON_TIME 5 // 50ms
+#define CD_TIME 10 // (ON_TIME << 1) 
+#define HEAD_BUFFER 10 // (ON_TIME << 1)
+#define TAIL_BUFFER 10 //(ON_TIME << 1)
+#define M (8) // 2^8, 8-bits 
+#define N (1 << M) // 8 bits
 
 #define BIT3 11
 #define BIT2 10
@@ -18,6 +18,8 @@ int headStart, headEnd, posEdge, negEdge, tailTime = 0;
 
 void test(){
   Serial.println("===========TEST===========");
+  Serial.print("Len: ");
+  Serial.println(N);
   for(byte i = 0; i < N; i++){
     digitalWrite(BIT3, (i & 0x8));
     digitalWrite(BIT2, (i & 0x4));
@@ -61,7 +63,7 @@ void test(){
     Serial.print("  tailTime:");
     Serial.println(tailTime);
 
-    delay(1000);
+    delay(200);
     
   }
 
@@ -79,9 +81,9 @@ void setup() {
   pinMode(LASER, OUTPUT);
   digitalWrite(LASER, LOW);
 
+  test();
 }
 
 void loop() {
-  delay(1000);
-  test();
+
 }
