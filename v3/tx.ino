@@ -213,6 +213,8 @@ void TX_Commit(byte RD, byte RS, byte DT, byte OP){
   Serial.println("  Lower part done.");
   Serial.print("    Lower part took: "); Serial.print(lowerInstEnd-protocolStart); Serial.println(" us.");
 
+  delay(50); // Test this
+  
   TX_Transmit(inst1); // transmit higher 8 bits
   upperInstEnd = VPPM_TIME_REG.elapsed();
   Serial.println("  Upper part done.");
@@ -248,29 +250,12 @@ void loop() {
       case 'd': {TX_Commit(DEV1, MASTER, 13, opLED_ON); break;}
       case 'e': {TX_Commit(DEV1, MASTER, 14, opLED_ON); break;}
       case 'f': {TX_Commit(DEV1, MASTER, 15, opLED_ON); break;}
+
+      case 'q': {TX_Commit(DEV1, MASTER, 2, opLED_OFF); break;}        // Turn off BIT2 of DEV1 (under testing)
       
       case 'z': {TX_Commit(DEV1, MASTER, 255, opLED_ON); break;}      // LED open given 255 value for DT
       case 'p': {printConfig(); break;}                               // Print Configurations (no pulses)
       case 'x': {TX_Transmit(255); break;}                            // Raw send 255 using VPPM (1 phase only)
-
-//      case '0': {TX_Transmit(0); break;}
-//      case '1': {TX_Transmit(1); break;}
-//      case '2': {TX_Transmit(2); break;}
-//      case '3': {TX_Transmit(3); break;}
-//      case '4': {TX_Transmit(4); break;}
-//      case '5': {TX_Transmit(5); break;}
-//      case '6': {TX_Transmit(6); break;}
-//      case '7': {TX_Transmit(7); break;}
-//      case '8': {TX_Transmit(8); break;}
-//      case '9': {TX_Transmit(9); break;}
-//      case 'a': {TX_Transmit(10); break;}
-//      case 'b': {TX_Transmit(11); break;}
-//      case 'c': {TX_Transmit(12); break;}
-//      case 'd': {TX_Transmit(13); break;}
-//      case 'e': {TX_Transmit(14); break;}
-//      case 'f': {TX_Transmit(15); break;}
-//      case 'p': {printConfig(); break;}
-//      case 'x': {TX_Transmit(255); break;}
 
       default: ; // Do nothing for NULL string
     }
