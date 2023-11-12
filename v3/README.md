@@ -11,8 +11,8 @@
 
   The TX serial monitor shows all the necessary timing information and instruction breakdown. The transmitted instruction can be verified using the serial monitor of the RX device.
 
-
-  TODO:
+<br>
+  <b>TODO:</b>
   1. Finish all instruction set.
   2. Implement ACK protocol.
   3. Add DEV3.
@@ -20,8 +20,8 @@
   
 </p>
   
-
-Current Implementation
+<br>
+<b>Current Implementation</b>
 - has instruction set defined
 - goes to 2 seconds at 16 bits (confirmed and tested as of Nov 12, 2023)
 
