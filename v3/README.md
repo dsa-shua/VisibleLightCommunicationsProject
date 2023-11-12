@@ -13,19 +13,18 @@
 
 <br>
   <b>TODO:</b>
-  1. Finish all instruction set.
-  2. Implement ACK protocol.
-  3. Add DEV3.
-  4. Add interference and re-route signal.
-  
+  <li>Finish all instruction set</li>
+  <li>Implement ACK Protocol</li>
+  <li>Add DEV3</li>
+  <li>Add interference and re-routing protocol</li>
 </p>
   
 <br>
 <b>Current Implementation</b>
-- has instruction set defined
-- goes to 2 seconds at 16 bits (confirmed and tested as of Nov 12, 2023)
+<ol>has instruction set defined</ol>
+<ol>goes to 2 seconds at 16 bits (confirmed and tested as of Nov 12, 2023)</ol>
 
-<br>
+<br><br>
 <b>Instruction Set:</b>
 
 ```
