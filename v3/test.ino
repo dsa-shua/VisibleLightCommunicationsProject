@@ -342,7 +342,7 @@ void do_process() {
 
         // Relay
         detachInterrupt(ACK_PIN);
-        TX_Commit(DEV2, MASTER, DT_BUFF, OP_BUFF);
+        TX_Commit(DEV1, MASTER, DT_BUFF, OP_BUFF); // move laser
         attachInterrupt(ACK_PIN, isr, RISING);
       }
       else Serial.println("Ack was received");
