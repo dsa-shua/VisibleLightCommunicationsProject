@@ -338,17 +338,12 @@ void do_process() {
       if(!ACK_REC) {
         Serial.println("Ack never came :(");
         ACK_COUNTER = 0;
+        Serial.println("   Ack was not received! Relaying to S2.");
 
-        if(!ACK_REC) {
-          Serial.println("   Ack was not received! Relaying to S2.");
-
-          // Relay
-          detachInterrupt(ACK_PIN);
-          TX_Commit(DEV2, MASTER, DT_BUFF, OP_BUFF);
-          attachInterrupt(ACK_PIN, isr, RISING);
-        }
-        else Serial.println("   There we go...");  
-        
+        // Relay
+        detachInterrupt(ACK_PIN);
+        TX_Commit(DEV2, MASTER, DT_BUFF, OP_BUFF);
+        attachInterrupt(ACK_PIN, isr, RISING);
       }
       else Serial.println("Ack was received");
 
